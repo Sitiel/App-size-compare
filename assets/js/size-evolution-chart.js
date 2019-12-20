@@ -18,7 +18,7 @@ function drawSizeEvolutionChart(apps) {
 	let xScale = d3.scaleLinear().range([50, width - 50]).domain([
 		d3.min(Object.values(apps), app => d3.min(app["versions"], a => new Date(a["date"]).getTime())),
 		d3.max(Object.values(apps), app => d3.max(app["versions"], a => new Date(a["date"]).getTime()))]);
-	let yScale = d3.scaleLinear().range([10, height - 100]).domain([0, d3.max(Object.values(apps), app => d3.max(app["versions"], a => a["size"]))]);
+	let yScale = d3.scaleLinear().range([10, height - 100]).domain([d3.max(Object.values(apps), app => d3.max(app["versions"], a => a["size"])), 0]);
 	
 	let defs = svg.append("defs");
 	
@@ -32,8 +32,9 @@ function drawSizeEvolutionChart(apps) {
 		.attr("transform", "translate(50, 0)");
 	
 	svg.append("g")
-		.call(d3.axisBottom(xScale))
+		.call(d3.axisBottom(xScale)
+			.tickFormat(d => moment(new Date(d)).format("DD/MM/YYYY")))
 		.attr("transform", `translate(0, ${height - 100})`)
 		.selectAll("text")
-		.attr("transform", d => "translate(35, 35) rotate(45)");
+		.attr("transform", "translate(20, 20) rotate(45)");
 }

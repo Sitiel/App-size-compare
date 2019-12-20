@@ -30,7 +30,6 @@ $(document).ready(function() {
 		for (let appName in apps) {
 			let appObject = apps[appName];
 			let appId = appName.replace(' ', '-');
-			console.log(appObject);
 			defs.append("pattern")
 				.attr("id", appId)
 				.attr("width", 1)
@@ -64,5 +63,6 @@ $(document).ready(function() {
 				});
 			iter++;
 		}
+		drawSizeEvolutionChart(apps);
 	});
 });

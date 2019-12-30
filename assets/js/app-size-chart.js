@@ -64,5 +64,6 @@ $(document).ready(function() {
 			iter++;
 		}
 		drawSizeEvolutionChart(apps);
+		drawAppSizeComparison(apps);
 	});
 });

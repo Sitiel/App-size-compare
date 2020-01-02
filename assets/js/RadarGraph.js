@@ -20,14 +20,15 @@ var RadarChart = {
 			h: 600,
 			factor: 1,
 			factorLegend: .85,
-			levels: 3,
+			levels: 6,
 			maxValue: 0,
+			maxLevel: 0,
 			radians: 2 * Math.PI,
 			opacityArea: 0.5,
 			ToRight: 5,
 			TranslateX: 80,
 			TranslateY: 30,
-			ExtraWidthX: 100,
+			ExtraWidthX: 150,
 			ExtraWidthY: 100,
 			color: d3.scaleOrdinal(d3.schemeCategory10)
 		};
@@ -40,10 +41,11 @@ var RadarChart = {
 			}
 		}
 		cfg.maxValue = Math.max(cfg.maxValue, d3.max(d, function(i){return d3.max(i.map(function(o){return o.value;}))}));
+		cfg.maxLevel = d3.format(".1r")(cfg.maxValue);
 		var allAxis = (d[0].map(function(i, j){return i.axis}));
 		var total = allAxis.length;
 		var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
-		var Format = d3.format('%');
+		var Format = d3.format('.0f');
 		d3.select(id).select("svg").remove();
 		
 		var g = d3.select(id)
@@ -58,7 +60,7 @@ var RadarChart = {
 		
 		//Circular segments
 		for(var j=0; j<cfg.levels-1; j++){
-			var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+			var levelFactor = cfg.factor*radius*((j+1)/cfg.levels*cfg.maxLevel/cfg.maxValue);
 			g.selectAll(".levels")
 				.data(allAxis)
 				.enter()
@@ -76,7 +78,7 @@ var RadarChart = {
 		
 		//Text indicating at what % each level is
 		for(var j=0; j<cfg.levels; j++){
-			var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
+			var levelFactor = cfg.factor*radius*((j+1)/cfg.levels*cfg.maxLevel/cfg.maxValue);
 			g.selectAll(".levels")
 				.data([1]) //dummy data
 				.enter()
@@ -88,7 +90,7 @@ var RadarChart = {
 				.style("font-size", "10px")
 				.attr("transform", "translate(" + (cfg.w/2-levelFactor + cfg.ToRight) + ", " + (cfg.h/2-levelFactor) + ")")
 				.attr("fill", "#737373")
-				.text(Format((j+1)*cfg.maxValue/cfg.levels));
+				.text(Format((j+1)*cfg.maxLevel/cfg.levels));
 		}
 		
 		series = 0;

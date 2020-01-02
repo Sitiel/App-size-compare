@@ -23,7 +23,7 @@ $(document).ready(function() {
 		.attr("class", "tooltip")
 		.style("opacity", 0);
 	
-	d3.json("data.json").then(function (apps) {
+	d3.json("data_social_network.json").then(function (apps) {
 		console.log(apps);
 		let appSize = width/4;
 		iter = 0;
@@ -36,7 +36,7 @@ $(document).ready(function() {
 				.attr("height", 1)
 				.attr("patternUnits", "objectBoundingBox")
 				.append("image")
-				.attr("xlink:href", "https://androidapksfree.com/wp-content/uploads/2017/03/LinkedIn-APK-85x85.png")
+				.attr("xlink:href", appObject["icon"])
 				.attr("width", appSize - (leftMargin + rightMargin))
 				.attr("height", appSize - (topMargin + bottomMargin));
 			

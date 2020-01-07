@@ -63,14 +63,31 @@ $(document).ready(function() {
 						.style("opacity", 0);
 				})
 				.on("click", function(){
-					console.log(this);
-					// this.attr("stroke-width", "200");
-					apps_to_draw.push(appName);
-					draw_lines(apps, apps_to_draw)
+					console.log("This : ", this);
+					let index = apps_to_draw.indexOf(appName);
+					if(index === -1){
+						d3.select(this)
+							.attr("stroke-width", "0")
+							.transition()
+							.duration(300)
+							.style("stroke", "red")
+							.attr("stroke-width", "5");
+
+						apps_to_draw.push(appName);
+					}
+					else{
+						d3.select(this)
+							.transition()
+							.duration(300)
+							.attr("stroke-width", "0");
+						apps_to_draw.splice(index, 1);
+					}
+
+					drawSizeEvolutionChart(apps, apps_to_draw)
 				});
 			iter++;
 		}
-		drawSizeEvolutionChart(apps);
+		drawSizeEvolutionChart(apps, []);
 		drawAppSizeComparison(apps);
 	});
 });

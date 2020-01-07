@@ -7,12 +7,12 @@ function drawAppSizeComparison(apps) {
 		let versions = apps[appName]["versions"];
 		// Sort versions
 		versions.sort(function(a, b) {
-			return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
+			return moment(a[0], "DD-MM-YYYY").unix() - moment(b[0], "DD-MM-YYYY").unix();
 		});
 		
 		data.push({
 			axis: appName,
-			value: parseFloat(versions[versions.length - 1]["size"]),
+			value: parseFloat(versions[versions.length - 1][1]),
 		});
 	}
 	

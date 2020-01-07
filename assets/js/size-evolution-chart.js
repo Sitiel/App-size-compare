@@ -23,6 +23,10 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a[0], "YYYY-MM-DD").unix()))]);
 	let yScale = d3.scaleLinear().range([10, height - 100]).domain([d3.max(Object.values(apps), app => d3.max(app["versions"], a => a[1])), 0]);
 
+    let Color = d3.scaleOrdinal()
+        .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"])
+      .domain(Object.keys(apps));
+
 	let defs = svg.append("defs");
 	
 	// Define the div for the tooltip
@@ -60,7 +64,7 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 						return yScale(d[1])
 					}))
 			.attr("fill", "none")
-			.attr("stroke", "steelblue")
+			.attr("stroke", Color(appName))
 			.attr("stroke-width", 3);
 
 			var totalLength = path.node().getTotalLength();

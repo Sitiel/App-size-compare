@@ -25,6 +25,11 @@ $(document).ready(function() {
 		.style("opacity", 0);
 	
 	d3.json("data_social_network.json").then(function (apps) {
+        let Color = d3.scaleOrdinal()
+        .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"])
+        .domain(Object.keys(apps));
+
+
 		console.log(apps);
 		let appSize = width/4;
 		iter = 0;
@@ -70,7 +75,7 @@ $(document).ready(function() {
 							.attr("stroke-width", "0")
 							.transition()
 							.duration(300)
-							.style("stroke", "red")
+							.style("stroke", Color(appName))
 							.attr("stroke-width", "5");
 
 						apps_to_draw.push(appName);

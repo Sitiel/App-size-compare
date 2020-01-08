@@ -43,6 +43,10 @@ $(document).ready(function() {
         	return appName.replace(/ /g, '-');
         };
         
+        const isAppDisabled = function(appName) {
+        	return !includedCategories.includes(apps[appName]["categorie"]) || apps[appName]["os"]!=os;
+        };
+        
         const onAppClicked = function(appName, force_select = false, force_deselect = false, commit = true) {
         	if (force_select && force_deselect)
         		throw new EvalError("force_select and force_deselect cannot be true at the same time.");
@@ -111,7 +115,8 @@ $(document).ready(function() {
         
         d3.selectAll(".select-all").on('click', function() {
         	for (let appName in apps)
-		        onAppClicked(getAppId(appName), true, undefined, false);
+        		if (!isAppDisabled(appName))
+			        onAppClicked(getAppId(appName), true, undefined, false);
 	        drawSizeEvolutionChart(apps, apps_to_draw)
         });
 		d3.selectAll(".deselect-all").on('click', function() {
@@ -128,9 +133,8 @@ $(document).ready(function() {
             maxYOfLine = 0;
             for (let appName in apps) {
                 let appObject = apps[appName];
-                if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
-                    continue
-                }
+                if(isAppDisabled(appName))
+                    continue;
                 let appId = getAppId(appName);
                 let versions = appObject.versions;
 	            versions.sort(function (a, b) {

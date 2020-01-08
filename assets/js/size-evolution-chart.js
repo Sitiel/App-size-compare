@@ -6,16 +6,25 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		.attr("width", "100%")
 		.attr("height", "800px")
 		.append("g");
-	
+
 	svg.selectAll("*").remove();
-	
+
 	let jsizeEvolutionChart = $("#size-evolution-chart-placeholder");
 	let width = jsizeEvolutionChart.width();
 	let height = jsizeEvolutionChart.height();
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
 
-	
+	svg.append("text")
+		.attr("x", (width/2+50))
+		.attr("y",  30)
+		.attr("text-anchor", "middle")
+		.style("font-size", "16px")
+		.style("text-decoration", "underline")
+		.text("Applications size by time");
+
+
+
 	// Create scales
 	let xScale = d3.scaleLinear().range([50, width - 50]).domain([
 		d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix())),

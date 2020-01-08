@@ -47,7 +47,6 @@ $(document).ready(function() {
                 update = true
             }
             if(update) {
-                console.log(4242)
                 defs.selectAll("pattern").remove()
                 svg.selectAll("rect").remove()
                 createMap(apps)

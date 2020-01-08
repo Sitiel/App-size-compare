@@ -16,3 +16,10 @@ div.tooltip {
 	margin-left: 10%;
 	margin-right: 10%;
 }
+
+.btn {
+	font-size: 8pt;
+}
+.btn + .btn {
+	margin-top: 8px;
+}

@@ -47,7 +47,7 @@ $(document).ready(function() {
         	if (force_select && force_deselect)
         		throw new EvalError("force_select and force_deselect cannot be true at the same time.");
 	        let index = apps_to_draw.indexOf(appName);
-	        if(index === -1 || force_select || !force_deselect) {
+	        if(force_select || (index === -1 && !force_deselect)) {
 	        	console.log("d3.select('#' + getAppId(appName) + \"-app\"):", d3.select('#' + getAppId(appName) + "-app"));
 		        d3.select('#' + getAppId(appName) + "-app")
 			        .attr("stroke-width", "0")

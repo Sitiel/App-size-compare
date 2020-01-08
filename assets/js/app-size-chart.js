@@ -131,8 +131,14 @@ $(document).ready(function() {
                 iter++;
             }
             }
-        createMap(apps)
+        createMap(apps);
         drawSizeEvolutionChart(apps, []);
-		drawAppSizeComparison(apps);
+		d3.json("data_ios_music.json").then(function (ios_music_apps) {
+			d3.json("data_ios_social_network.json").then(function (ios_social_network_apps) {
+				d3.json("data_ios_video.json").then(function (data_ios_video) {
+					drawAppSizeComparison(apps, {...ios_music_apps, ...ios_social_network_apps, ...data_ios_video});
+				});
+			});
+		});
 	});
 });

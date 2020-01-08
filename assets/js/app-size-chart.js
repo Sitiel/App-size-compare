@@ -68,12 +68,19 @@ $(document).ready(function() {
 		function createMap(apps) {
             let appSize = width/4;
             iter = 0;
+			svg.attr("layout-css", "display: flex, flex: 1, flexDirection: row, flexWrap: wrap;");
             for (let appName in apps) {
                 let appObject = apps[appName];
                 if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
                     continue
                 }
                 let appId = appName.replace(' ', '-');
+                let versions = appObject.versions;
+	            versions.sort(function (a, b) {
+	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
+                });
+	            let size = versions[versions.length - 1]["size"];
+	            appSize = Math.max(Math.ceil(Math.log10(size) * 12), 1 + (leftMargin + rightMargin), 1 + (topMargin + bottomMargin));
                 defs.append("pattern")
                     .attr("id", appId)
                     .attr("width", 1)
@@ -87,8 +94,8 @@ $(document).ready(function() {
                 svg.append("rect")
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin))
-                    .attr("x", (iter % 4) * appSize + leftMargin)
-                    .attr("y", (Math.floor(iter / 4)) * appSize + bottomMargin)
+                    // .attr("x", (iter % 4) * appSize + leftMargin)
+                    // .attr("y", (Math.floor(iter / 4)) * appSize + bottomMargin)
                     .style("fill", `url(#${appId})`)
                     .on("mouseover", function(_) {
                         tooltip
@@ -130,7 +137,7 @@ $(document).ready(function() {
                     });
                 iter++;
             }
-            }
+        }
         createMap(apps);
         drawSizeEvolutionChart(apps, []);
 		d3.json("data_ios_music.json").then(function (ios_music_apps) {

@@ -38,7 +38,47 @@ $(document).ready(function() {
                 categories.push(apps[appName]["categorie"])
             }
         }
-        includedCategories = categories
+        
+        const getAppId = function(appName) {
+        	return appName.replace(/ /g, '-');
+        };
+        
+        const onAppClicked = function(appName, force_select = false, force_deselect = false, commit = true) {
+        	if (force_select && force_deselect)
+        		throw new EvalError("force_select and force_deselect cannot be true at the same time.");
+	        let index = apps_to_draw.indexOf(appName);
+	        if(force_select || (index === -1 && !force_deselect)) {
+	        	console.log("d3.select('#' + getAppId(appName) + \"-app\"):", d3.select('#' + getAppId(appName) + "-app"));
+		        d3.select('#' + getAppId(appName) + "-app")
+			        .attr("stroke-width", "0")
+			        .transition()
+			        .duration(300)
+			        .style("stroke", Color(appName))
+			        .attr("stroke-width", "5");
+		
+		        if (!apps_to_draw.includes(appName))
+		            apps_to_draw.push(appName);
+	        }
+	        else{
+		        d3.select('#' + getAppId(appName) + "-app")
+			        .transition()
+			        .duration(300)
+			        .attr("stroke-width", "0");
+		        
+		        if (index !== -1)
+			        apps_to_draw.splice(index, 1);
+	        }
+			
+	        if (commit)
+		        drawSizeEvolutionChart(apps, apps_to_draw)
+        };
+        const deselectAllApps = function(commit = true) {
+	        apps_to_draw = [];
+	        if (commit)
+		        drawSizeEvolutionChart(apps, apps_to_draw)
+        };
+        
+        includedCategories = categories;
         d3.selectAll(".filter_button").on("change", function() {
             // I *think* "inline" is the default.
             var update = false
@@ -68,6 +108,17 @@ $(document).ready(function() {
             apps_to_draw = []
             drawSizeEvolutionChart(apps, apps_to_draw)
         });
+        
+        d3.selectAll(".select-all").on('click', function() {
+        	for (let appName in apps)
+		        onAppClicked(getAppId(appName), true, undefined, false);
+	        drawSizeEvolutionChart(apps, apps_to_draw)
+        });
+		d3.selectAll(".deselect-all").on('click', function() {
+			for (let appName in apps)
+				onAppClicked(getAppId(appName), undefined, true, false);
+			deselectAllApps();
+		});
 
 		function createMap(apps) {
 
@@ -83,7 +134,7 @@ $(document).ready(function() {
                 if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
                     continue
                 }
-                let appId = appName.replace(/ /g, '-');
+                let appId = getAppId(appName);
                 let versions = appObject.versions;
 	            versions.sort(function (a, b) {
 	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
@@ -111,6 +162,7 @@ $(document).ready(function() {
 
 
                 svg.append("rect")
+	                .attr("id", appId + "-app")
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin))
                      .attr("x", lastX + leftMargin)
@@ -132,27 +184,7 @@ $(document).ready(function() {
                             .style("opacity", 0);
                     })
                     .on("click", function(){
-                        console.log("This : ", this);
-                        let index = apps_to_draw.indexOf(appName);
-                        if(index === -1){
-                            d3.select(this)
-                                .attr("stroke-width", "0")
-                                .transition()
-                                .duration(300)
-                                .style("stroke", Color(appName))
-                                .attr("stroke-width", "5");
-
-                            apps_to_draw.push(appName);
-                        }
-                        else{
-                            d3.select(this)
-                                .transition()
-                                .duration(300)
-                                .attr("stroke-width", "0");
-                            apps_to_draw.splice(index, 1);
-                        }
-
-                        drawSizeEvolutionChart(apps, apps_to_draw)
+                        onAppClicked(appName);
                     });
                 lastX += appSize;
                 iter++;

@@ -14,7 +14,7 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 	let height = jsizeEvolutionChart.height();
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
-    let leftMargin = 20; 
+    let leftMargin = 20;
     let bottomMargin = 20;
 
 	svg.append("text")
@@ -48,7 +48,6 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix())),
 		d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()))]);
 	let yScale = d3.scaleLinear().range([50, height - 100 - bottomMargin]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
-    console.log(d3.max(Object.values(apps), app => d3.max(app["versions"], a => a["size"])))
 
     let Color = d3.scaleOrdinal()
         .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"])
@@ -101,7 +100,6 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		if(apps_to_draw.indexOf(appName) == -1)
 			continue;
 		let versions = apps[appName]["versions"];
-        console.log(versions)
 		// Sort versions
 		versions.sort(function (a, b) {
 			return moment(a["date"], "YYYY-MM-DD").unix() - moment(b["date"], "YYYY-MM-DD").unix();

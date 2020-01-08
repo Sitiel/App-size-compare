@@ -14,22 +14,40 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 	let height = jsizeEvolutionChart.height();
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
+    let leftMargin = 20;
+    let bottomMargin = 20;
 
 	svg.append("text")
-		.attr("x", (width/2+50))
+		.attr("x", (width/2+50 + leftMargin))
 		.attr("y",  30)
 		.attr("text-anchor", "middle")
 		.style("font-size", "16px")
 		.style("text-decoration", "underline")
-		.text("Applications size by time");
+		.text("Applications size evolution over time")
+        .style("fill", "white");
+
+    svg.append("text")
+		.attr("x", (width/2+50 +leftMargin))
+		.attr("y",  height-30-bottomMargin)
+		.attr("text-anchor", "middle")
+		.text("Version release date")
+        .style("fill", "white");
+
+    svg.append("text")
+		.attr("x", -(height/2-50-bottomMargin))
+		.attr("y",  (leftMargin))
+		.attr("text-anchor", "middle")
+		.text("Application size (kB)")
+        .style("fill", "white")
+        .attr("transform", "rotate(-90)");
 
 
 
 	// Create scales
-	let xScale = d3.scaleLinear().range([50, width - 50]).domain([
+	let xScale = d3.scaleLinear().range([50+leftMargin, width - 50]).domain([
 		d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix())),
 		d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()))]);
-	let yScale = d3.scaleLinear().range([10, height - 100]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
+	let yScale = d3.scaleLinear().range([50, height - 100 - bottomMargin]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
 
     let Color = d3.scaleOrdinal()
         .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"])
@@ -42,8 +60,8 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		.data(apps_to_draw)
 		.enter()
 		.append("rect")
-		.attr("x", 60)
-		.attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("x", 60+leftMargin)
+		.attr("y", function(d,i){ return 50 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
 		.attr("width", size)
 		.attr("height", size)
 		.style("fill", function(d){ return Color(d)})
@@ -53,8 +71,8 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		.data(apps_to_draw)
 		.enter()
 		.append("text")
-		.attr("x", 60 + size*1.2)
-		.attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("x", 60 + size*1.2+ leftMargin)
+		.attr("y", function(d,i){ return 50 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
 		.style("fill", function(d){ return Color(d)})
 		.text(function(d){ return d})
 		.attr("text-anchor", "left")
@@ -69,12 +87,12 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 	
 	svg.append("g")
 		.call(d3.axisLeft(yScale))
-		.attr("transform", "translate(50, 0)");
+		.attr("transform", "translate(70, 0)");
 	
 	svg.append("g")
 		.call(d3.axisBottom(xScale)
 			.tickFormat(d => moment(new Date(d*1000)).format("DD/MM/YYYY")))
-		.attr("transform", `translate(0, ${height - 100})`)
+		.attr("transform", `translate(0, ${height - 100 - bottomMargin})`)
 		.selectAll("text")
 		.attr("transform", "translate(20, 20) rotate(45)");
 

@@ -35,5 +35,6 @@ function drawAppSizeComparison(android_apps, ios_apps) {
 	RadarChart.draw("#app-size-comparison-placeholder", [android_data, ios_data], {
 		w: 400,
 		h: 400,
+		legends: ["Android", "iOS"]
 	});
 }

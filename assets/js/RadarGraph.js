@@ -30,7 +30,8 @@ var RadarChart = {
 			TranslateY: 30,
 			ExtraWidthX: 150,
 			ExtraWidthY: 100,
-			color: d3.scaleOrdinal(d3.schemeCategory10)
+			color: d3.scaleOrdinal(d3.schemeCategory10),
+			legends: []
 		};
 		
 		if('undefined' !== typeof options){
@@ -223,5 +224,31 @@ var RadarChart = {
 			.style('opacity', 0)
 			.style('font-family', 'sans-serif')
 			.style('font-size', '13px');
+		
+		// Legend
+		if (cfg.legends != null && cfg.legends.length > 0) {
+			let size = 20;
+			g.selectAll("mydots")
+				.data(cfg.legends)
+				.enter()
+				.append("rect")
+				.attr("x", -60)
+				.attr("y", function(d,i){ return i*(size+5) - 20}) // 100 is where the first dot appears. 25 is the distance between dots
+				.attr("width", size)
+				.attr("height", size)
+				.style("fill", function(d){ return cfg.color(cfg.legends.indexOf(d)) });
+	
+			// Add one dot in the legend for each name.
+			g.selectAll("mylabels")
+				.data(cfg.legends)
+				.enter()
+				.append("text")
+				.attr("x", size*1.2 - 60)
+				.attr("y", function(d,i){ return i*(size+5) + (size/2) - 20}) // 100 is where the first dot appears. 25 is the distance between dots
+				.style("fill", function(d){ return cfg.color(cfg.legends.indexOf(d)) })
+				.text(function(d){ return d})
+				.attr("text-anchor", "left")
+				.style("alignment-baseline", "middle");
+		}
 	}
 };

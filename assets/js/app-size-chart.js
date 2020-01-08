@@ -9,10 +9,10 @@ $(document).ready(function() {
 	let jappSizeChartPlaceholder = $("#app-size-chart-placeholder");
 	let width = jappSizeChartPlaceholder.width();
 	let height = jappSizeChartPlaceholder.height();
-	let leftMargin = 0;
-	let rightMargin = 0;
-	let topMargin = 0;
-	let bottomMargin = 0;
+	let leftMargin = 5;
+	let rightMargin = 5;
+	let topMargin = 5;
+	let bottomMargin = 5;
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
 	
@@ -47,7 +47,6 @@ $(document).ready(function() {
                 update = true
             }
             if(update) {
-                console.log(4242)
                 defs.selectAll("pattern").remove()
                 svg.selectAll("rect").remove()
                 createMap(apps)
@@ -68,7 +67,6 @@ $(document).ready(function() {
 		function createMap(apps) {
             let appSize = width/4;
             iter = 0;
-			svg.attr("layout-css", "display: flex, flex: 1, flexDirection: row, flexWrap: wrap;");
 			lastX = 0;
 			lastY = 0;
             maxYOfLine = 0;
@@ -77,7 +75,7 @@ $(document).ready(function() {
                 if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
                     continue
                 }
-                let appId = appName.replace(' ', '-');
+                let appId = appName.replace(/ /g, '-');
                 let versions = appObject.versions;
 	            versions.sort(function (a, b) {
 	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();

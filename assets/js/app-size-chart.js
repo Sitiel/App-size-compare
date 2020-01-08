@@ -126,7 +126,10 @@ $(document).ready(function() {
 		});
 
 		function createMap(apps) {
-            let appSize = width/4;
+
+            let appScale = d3.scaleLinear().range([10, (width/7)*(os=="android") + (width/6)*(os=="ios")])
+                .domain([0,Math.sqrt(d3.max(Object.values(apps), function(app){
+                    if(app["os"]!=os){return 0;}else{return app["versions"][app["versions"].length - 1]["size"];}}))]);
             iter = 0;
 			lastX = 0;
 			lastY = 0;
@@ -141,7 +144,7 @@ $(document).ready(function() {
 	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
                 });
 	            let size = versions[versions.length - 1]["size"];
-	            appSize = Math.max(Math.sqrt(size/8), 1 + (leftMargin + rightMargin), 1 + (topMargin + bottomMargin));
+	            let appSize = appScale(Math.sqrt(size));
                 defs.append("pattern")
                     .attr("id", appId)
                     .attr("width", 1)
@@ -191,12 +194,13 @@ $(document).ready(function() {
                 iter++;
             }
         }
-        createMap(apps);
+        
         drawSizeEvolutionChart(apps, []);
 		d3.json("data_ios_music.json").then(function (ios_music_apps) {
 			d3.json("data_ios_social_network.json").then(function (ios_social_network_apps) {
 				d3.json("data_ios_video.json").then(function (data_ios_video) {
 					drawAppSizeComparison(apps, {...ios_music_apps, ...ios_social_network_apps, ...data_ios_video});
+createMap(apps);
 				});
 			});
 		});

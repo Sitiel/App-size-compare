@@ -14,6 +14,7 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 	let height = jsizeEvolutionChart.height();
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
+
 	
 	// Create scales
 	let xScale = d3.scaleLinear().range([50, width - 50]).domain([
@@ -25,6 +26,31 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
     let Color = d3.scaleOrdinal()
         .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"])
       .domain(Object.keys(apps));
+
+
+// Add one dot in the legend for each name.
+	var size = 20
+	svg.selectAll("mydots")
+		.data(apps_to_draw)
+		.enter()
+		.append("rect")
+		.attr("x", 60)
+		.attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("width", size)
+		.attr("height", size)
+		.style("fill", function(d){ return Color(d)})
+
+// Add one dot in the legend for each name.
+	svg.selectAll("mylabels")
+		.data(apps_to_draw)
+		.enter()
+		.append("text")
+		.attr("x", 60 + size*1.2)
+		.attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.style("fill", function(d){ return Color(d)})
+		.text(function(d){ return d})
+		.attr("text-anchor", "left")
+		.style("alignment-baseline", "middle")
 
 	let defs = svg.append("defs");
 	

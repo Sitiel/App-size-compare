@@ -33,8 +33,6 @@ $(document).ready(function() {
                 categories.push(apps[appName]["categorie"])
             }
         }
-        console.log(categories)
-		console.log(apps);
         includedCategories = categories
         d3.selectAll(".filter_button").on("change", function() {
             // I *think* "inline" is the default.
@@ -48,7 +46,6 @@ $(document).ready(function() {
                 categories.splice( categories.indexOf(this.id), 1 )
                 update = true
             }
-            console.log(categories) 
             if(update) {
                 console.log(4242)
                 defs.selectAll("pattern").remove()
@@ -67,8 +64,7 @@ $(document).ready(function() {
             apps_to_draw = []
             drawSizeEvolutionChart(apps, apps_to_draw)
         });
-        console.log("coucou")
-		console.log(apps);
+
 		function createMap(apps) {
             let appSize = width/4;
             iter = 0;
@@ -129,7 +125,6 @@ $(document).ready(function() {
                                 .attr("stroke-width", "0");
                             apps_to_draw.splice(index, 1);
                         }
-                        console.log(apps_to_draw)
 
                         drawSizeEvolutionChart(apps, apps_to_draw)
                     });

@@ -72,7 +72,7 @@ $(document).ready(function() {
                 if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
                     continue
                 }
-                let appId = appName.replace(' ', '-');
+                let appId = appName.replace(/ /g, '-');
                 defs.append("pattern")
                     .attr("id", appId)
                     .attr("width", 1)

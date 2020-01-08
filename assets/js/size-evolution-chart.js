@@ -19,7 +19,7 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 	let xScale = d3.scaleLinear().range([50, width - 50]).domain([
 		d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix())),
 		d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()))]);
-	let yScale = d3.scaleLinear().range([10, height - 100]).domain([d3.max(Object.values(apps), app => d3.max(app["versions"], a => parseFloat(a["size"]))), 0]);
+	let yScale = d3.scaleLinear().range([10, height - 100]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
     console.log(d3.max(Object.values(apps), app => d3.max(app["versions"], a => a["size"])))
 
     let Color = d3.scaleOrdinal()

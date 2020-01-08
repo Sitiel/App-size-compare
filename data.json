@@ -2,6 +2,7 @@
     "Discord": {
         "icon": "https://image.winudf.com/v2/image1/Y29tLmRpc2NvcmRfaWNvbl8xNTU0MDY5NjU3XzAyMQ/icon.png?w=170&fakeurl=1",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2019-03-31",
@@ -128,6 +129,7 @@
     "Facebook": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/Facebook-fb-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2014-12-02",
@@ -1166,6 +1168,7 @@
     "Facebook Lite": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2015/01/Facebook-Lite-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-01-31",
@@ -1936,6 +1939,7 @@
     "Instagram": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2015/03/Instagram-APK-1-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-03-15",
@@ -2810,6 +2814,7 @@
     "Instagram Lite": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2018/06/Instagram-Lite-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2018-07-22",
@@ -2876,6 +2881,7 @@
     "LinkedIn": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/03/LinkedIn-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-09",
@@ -3118,6 +3124,7 @@
     "LinkedIn Lite": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/07/LinkedIn-Lite-Jobs-and-Networking-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-08-03",
@@ -3196,6 +3203,7 @@
     "Messenger": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/facebook-messenger-apk-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-03-01",
@@ -4222,6 +4230,7 @@
     "Snapchat": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2015/03/Snapchat-APK-1-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-03-30",
@@ -4924,6 +4933,7 @@
     "Telegram": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2015/09/Telegram-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-10-07",
@@ -5370,6 +5380,7 @@
     "TikTok": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/TikTok-APK-1-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-27",
@@ -6084,6 +6095,7 @@
     "Twitter": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2015/07/Twitter-APK-1-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-08-06",
@@ -6786,6 +6798,7 @@
     "Twitter Lite": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/09/Twitter-Lite-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-10-16",
@@ -6828,6 +6841,7 @@
     "WhatsApp": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/WhatsApp-Messenger-APK-85x85.png",
         "categorie": "social_network",
+        "os": "android",
         "versions": [
             {
                 "date": "2014-11-15",
@@ -10242,6 +10256,7 @@
     "Amazon Music": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/11/Amazon-Music-APK-1-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-06",
@@ -10396,6 +10411,7 @@
     "Apple Music": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/07/Apple-Music-APK-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-19",
@@ -10478,6 +10494,7 @@
     "Deezer": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/Deezer-APK-1-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-23",
@@ -10696,6 +10713,7 @@
     "Google Play Music": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/01/Google-play-Music-APK-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-05",
@@ -10786,6 +10804,7 @@
     "Shazam": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/Shazam-apk-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-10-28",
@@ -11000,6 +11019,7 @@
     "Spotify": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/06/Spotify-Music-APK-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2016-07-07",
@@ -11454,6 +11474,7 @@
     "Youtube Music": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/06/YouTube-Music-apk-85x85.png",
         "categorie": "music",
+        "os": "android",
         "versions": [
             {
                 "date": "2016-07-01",
@@ -11812,6 +11833,7 @@
     "Dailymotion": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/dailymotion-APK-85x85.png",
         "categorie": "video",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-12-15",
@@ -11894,6 +11916,7 @@
     "OGYoutube": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/01/OGYoutube-APK-85x85.png",
         "categorie": "video",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-01-21",
@@ -11928,6 +11951,7 @@
     "Twitch": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2018/06/Twitch-APK-85x85.png",
         "categorie": "video",
+        "os": "android",
         "versions": [
             {
                 "date": "2018-10-08",
@@ -12062,6 +12086,7 @@
     "Youtube": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2015/01/YouTube-APK-85x85.png",
         "categorie": "video",
+        "os": "android",
         "versions": [
             {
                 "date": "2015-01-01",
@@ -13132,6 +13157,7 @@
     "Youtube Go": {
         "icon": "https://androidapksfree.com/wp-content/uploads/2017/02/Yutube-Go-APK-85x85.png",
         "categorie": "video",
+        "os": "android",
         "versions": [
             {
                 "date": "2017-04-07",
@@ -13532,6 +13558,238 @@
             {
                 "date": "2019-12-06",
                 "size": "10137.6"
+            }
+        ]
+    },
+    "Discord ": {
+        "icon": "https://image.winudf.com/v2/image1/Y29tLmRpc2NvcmRfaWNvbl8xNTU0MDY5NjU3XzAyMQ/icon.png?w=170&fakeurl=1",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-18",
+            "size": "104550.4"
+            }
+        ]
+
+    },
+    "Facebook ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/Facebook-fb-APK-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-19",
+            "size": "435097.6"
+            }
+        ]
+    },
+    "Facebook Lite ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2015/01/Facebook-Lite-APK-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-31",
+            "size": "21401.6"
+            }
+        ]
+    },
+    "Instagram ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2015/03/Instagram-APK-1-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-30",
+            "size": "126771.2"
+            }
+        ]
+    },
+    "LinkedIn ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2017/03/LinkedIn-APK-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2020-01-02",
+            "size": "185344"
+            }
+        ]
+    },
+    "Messenger ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/facebook-messenger-apk-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-18",
+            "size": "286617.6"
+            }
+        ]
+     },
+     "Snapchat ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2015/03/Snapchat-APK-1-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-16",
+            "size": "197017.6"
+            }
+        ]
+    },
+    "Telegram ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2015/09/Telegram-APK-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2020-01-05",
+            "size": "188518.4"
+            }
+        ]
+    },
+    "TikTok ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/TikTok-APK-1-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2020-01-05",
+            "size": "381747.2"
+            }
+        ]
+    },
+    "Twitter ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2015/07/Twitter-APK-1-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-20",
+            "size": "123904"
+            }
+        ]
+    },
+    "WhatsApp ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/WhatsApp-Messenger-APK-85x85.png",
+        "categorie": "social_network",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-27",
+            "size": "46739.2"
+            }
+        ]
+    },
+    "Amazon Music ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2017/11/Amazon-Music-APK-1-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-30",
+            "size": "96153.6"
+            }
+        ]
+    },
+    "Apple Music ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/07/Apple-Music-APK-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-11-21",
+            "size": "2252.8"
+            }
+        ]
+    },
+    "Deezer ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/Deezer-APK-1-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-12",
+            "size": "137932.8"
+            }
+        ]
+    },
+    "Google Play Music ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2017/01/Google-play-Music-APK-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-19",
+            "size": "107315.2"
+            }
+        ]
+    },
+     "Shazam ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/Shazam-apk-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-09",
+            "size": "58982.4"
+            }
+        ]
+    },
+    "Spotify ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/06/Spotify-Music-APK-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-02",
+            "size": "110694.4"
+            }
+        ]
+    },
+     "Youtube Music ": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/06/YouTube-Music-apk-85x85.png",
+        "categorie": "music",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2020-01-02",
+            "size": "233267.2"
+            }
+        ]
+    },
+    "Dailymotion": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/dailymotion-APK-85x85.png",
+        "categorie": "video",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2020-01-06",
+            "size": "115609.6"
+            }
+        ]
+    },
+    "Twitch": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2018/06/Twitch-APK-85x85.png",
+        "categorie": "video",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2019-12-10",
+            "size": "160665.6"
+            }
+        ]
+    },
+    "Youtube": {
+        "icon": "https://androidapksfree.com/wp-content/uploads/2015/01/YouTube-APK-85x85.png",
+        "categorie": "video",
+        "os": "ios",
+        "versions": [
+            {
+            "date": "2020-01-06",
+            "size": "210227.2"
             }
         ]
     }

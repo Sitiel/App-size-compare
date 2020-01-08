@@ -19,6 +19,8 @@ $(document).ready(function() {
 	let defs = svg.append("defs");
 	let apps_to_draw = []
 	
+	var os = "android"
+	
 	// Define the div for the tooltip
 	var tooltip = d3.select("body").append("div")
 		.attr("class", "tooltip")
@@ -56,6 +58,15 @@ $(document).ready(function() {
                 drawSizeEvolutionChart(apps, apps_to_draw)
             }
             });
+        
+        d3.selectAll(".select_os").on("change", function() {
+            os = this.value
+            defs.selectAll("pattern").remove()
+            svg.selectAll("rect").remove()
+            createMap(apps)
+            apps_to_draw = []
+            drawSizeEvolutionChart(apps, apps_to_draw)
+        });
         console.log("coucou")
 		console.log(apps);
 		function createMap(apps) {
@@ -63,7 +74,7 @@ $(document).ready(function() {
             iter = 0;
             for (let appName in apps) {
                 let appObject = apps[appName];
-                if(!includedCategories.includes(appObject["categorie"])) {
+                if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
                     continue
                 }
                 let appId = appName.replace(' ', '-');

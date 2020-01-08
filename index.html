@@ -27,9 +27,24 @@
         </div>
     </nav>
     <header class="masthead" style="background:url('assets/img/bg-pattern.png'), linear-gradient(to right, #7b4397, #dc2430);height:100%;">
-        <div class="container h-100">
+        <div class="container h-100" id="header-container">
             <div class="row h-100">
-                <div class="col-lg-5 my-auto">
+                <div class="col-lg-2 my-auto">
+                    <div class="filter_options">
+                        <input class="filter_button" id="social_network" type="checkbox" checked>Réseaux sociaux</input><br>
+                        <input class="filter_button" id="video" type="checkbox" checked>Vidéo</input><br>
+                        <input class="filter_button" id="music" type="checkbox" checked>Musique</input><br>
+                    </div>
+                    <div>
+                        <input class="select_os" type="radio" id="android" name="drone" value="android" checked>
+                        <label>android</label>
+                    </div>
+                    <div>
+                        <input class="select_os" type="radio" id="ios" name="drone" value="ios">
+                        <label>ios</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 my-auto">
                     <div class="device-container">
                         <div class="device-mockup iphone6_plus portrait white">
                             <div class="device" style="background-image:url('assets/img/iphone_6_plus_white_port.png');">
@@ -40,27 +55,12 @@
                     </div>
                     <div class="iphone-mockup"></div>
                 </div>
-                <div class="col-lg-7 my-auto">
+                <div class="col-lg-6 my-auto">
                     <div class="mx-auto header-content">
                         <div id="size-evolution-chart-placeholder"></div>
                     </div>
                 </div>
-                <div class="filter_options">
-                    <input class="filter_button" id="social_network" type="checkbox" checked>Réseaux sociaux</input><br>
-                    <input class="filter_button" id="video" type="checkbox" checked>Vidéo</input><br>
-                    <input class="filter_button" id="music" type="checkbox" checked>Musique</input><br>
             </div>
-            <div>
-  <input class="select_os" type="radio" id="android" name="drone" value="android"
-         checked>
-  <label for="huey">android</label>
-</div>
-
-<div>
-  <input class="select_os" type="radio" id="ios" name="drone" value="ios">
-  <label for="dewey">ios</label>
-
-</div>
         </div>
     </header>
     <section id="download" class="download text-center bg-primary">

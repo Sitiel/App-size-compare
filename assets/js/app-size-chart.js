@@ -9,10 +9,10 @@ $(document).ready(function() {
 	let jappSizeChartPlaceholder = $("#app-size-chart-placeholder");
 	let width = jappSizeChartPlaceholder.width();
 	let height = jappSizeChartPlaceholder.height();
-	let leftMargin = 5;
-	let rightMargin = 5;
-	let topMargin = 5;
-	let bottomMargin = 5;
+	let leftMargin = 0;
+	let rightMargin = 0;
+	let topMargin = 0;
+	let bottomMargin = 0;
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
 	
@@ -69,6 +69,9 @@ $(document).ready(function() {
             let appSize = width/4;
             iter = 0;
 			svg.attr("layout-css", "display: flex, flex: 1, flexDirection: row, flexWrap: wrap;");
+			lastX = 0;
+			lastY = 0;
+            maxYOfLine = 0;
             for (let appName in apps) {
                 let appObject = apps[appName];
                 if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
@@ -90,12 +93,22 @@ $(document).ready(function() {
                     .attr("xlink:href", appObject['icon'])
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin));
-                
+
+                if(lastX + appSize > width){
+                    lastX = 0;
+                    lastY += maxYOfLine;
+                    maxYOfLine = appSize;
+                }
+                if(appSize > maxYOfLine){
+                    maxYOfLine = appSize;
+                }
+
+
                 svg.append("rect")
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin))
-                    // .attr("x", (iter % 4) * appSize + leftMargin)
-                    // .attr("y", (Math.floor(iter / 4)) * appSize + bottomMargin)
+                     .attr("x", lastX + leftMargin)
+                     .attr("y", lastY + bottomMargin)
                     .style("fill", `url(#${appId})`)
                     .on("mouseover", function(_) {
                         tooltip
@@ -135,6 +148,7 @@ $(document).ready(function() {
 
                         drawSizeEvolutionChart(apps, apps_to_draw)
                     });
+                lastX += appSize;
                 iter++;
             }
         }

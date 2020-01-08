@@ -67,12 +67,21 @@ $(document).ready(function() {
 		function createMap(apps) {
             let appSize = width/4;
             iter = 0;
+			lastX = 0;
+			lastY = 0;
+            maxYOfLine = 0;
             for (let appName in apps) {
                 let appObject = apps[appName];
                 if(!includedCategories.includes(appObject["categorie"]) || appObject["os"]!=os) {
                     continue
                 }
                 let appId = appName.replace(/ /g, '-');
+                let versions = appObject.versions;
+	            versions.sort(function (a, b) {
+	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
+                });
+	            let size = versions[versions.length - 1]["size"];
+	            appSize = Math.max(Math.sqrt(size/8), 1 + (leftMargin + rightMargin), 1 + (topMargin + bottomMargin));
                 defs.append("pattern")
                     .attr("id", appId)
                     .attr("width", 1)
@@ -82,12 +91,22 @@ $(document).ready(function() {
                     .attr("xlink:href", appObject['icon'])
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin));
-                
+
+                if(lastX + appSize > width){
+                    lastX = 0;
+                    lastY += maxYOfLine;
+                    maxYOfLine = appSize;
+                }
+                if(appSize > maxYOfLine){
+                    maxYOfLine = appSize;
+                }
+
+
                 svg.append("rect")
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin))
-                    .attr("x", (iter % 4) * appSize + leftMargin)
-                    .attr("y", (Math.floor(iter / 4)) * appSize + bottomMargin)
+                     .attr("x", lastX + leftMargin)
+                     .attr("y", lastY + bottomMargin)
                     .style("fill", `url(#${appId})`)
                     .on("mouseover", function(_) {
                         tooltip
@@ -127,9 +146,10 @@ $(document).ready(function() {
 
                         drawSizeEvolutionChart(apps, apps_to_draw)
                     });
+                lastX += appSize;
                 iter++;
             }
-            }
+        }
         createMap(apps);
         drawSizeEvolutionChart(apps, []);
 		d3.json("data_ios_music.json").then(function (ios_music_apps) {

@@ -17,9 +17,7 @@ $(document).ready(function() {
 	let defaultTransitionDuration = 200;
 	
 	let defs = svg.append("defs");
-    
-    var toto
-    
+	let apps_to_draw = []
 	
 	// Define the div for the tooltip
 	var tooltip = d3.select("body").append("div")
@@ -54,9 +52,13 @@ $(document).ready(function() {
                 defs.selectAll("pattern").remove()
                 svg.selectAll("rect").remove()
                 createMap(apps)
+                apps_to_draw = []
+                drawSizeEvolutionChart(apps, apps_to_draw)
             }
             });
-        function createMap(apps) {
+        console.log("coucou")
+		console.log(apps);
+		function createMap(apps) {
             let appSize = width/4;
             iter = 0;
             for (let appName in apps) {
@@ -71,7 +73,7 @@ $(document).ready(function() {
                     .attr("height", 1)
                     .attr("patternUnits", "objectBoundingBox")
                     .append("image")
-                    .attr("xlink:href", appObject["icon"])
+                    .attr("xlink:href", appObject['icon'])
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin));
                 
@@ -89,18 +91,42 @@ $(document).ready(function() {
                         tooltip.html(`${appName}<br/>${appObject["versions"][appObject["versions"].length-1]["date"]}: ${appObject["versions"][appObject["versions"].length-1]["size"]}`)
                             .style("left", d3.event.pageX + "px")
                             .style("top", d3.event.pageY + "px")
-                        toto = drawSizeEvolutionChart({appName: appObject});
                     })
                     .on("mouseout", function(_) {
-                        toto.remove()
                         tooltip
                             .transition(defaultTransition)
                             .duration(defaultTransitionDuration)
                             .style("opacity", 0);
+                    })
+                    .on("click", function(){
+                        console.log("This : ", this);
+                        let index = apps_to_draw.indexOf(appName);
+                        if(index === -1){
+                            d3.select(this)
+                                .attr("stroke-width", "0")
+                                .transition()
+                                .duration(300)
+                                .style("stroke", "red")
+                                .attr("stroke-width", "5");
+
+                            apps_to_draw.push(appName);
+                        }
+                        else{
+                            d3.select(this)
+                                .transition()
+                                .duration(300)
+                                .attr("stroke-width", "0");
+                            apps_to_draw.splice(index, 1);
+                        }
+                        console.log(apps_to_draw)
+
+                        drawSizeEvolutionChart(apps, apps_to_draw)
                     });
                 iter++;
             }
-        }
+            }
         createMap(apps)
+        drawSizeEvolutionChart(apps, []);
+		drawAppSizeComparison(apps);
 	});
 });

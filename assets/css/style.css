@@ -11,7 +11,7 @@ div.tooltip {
 	pointer-events: none;
 }
 
-.container, #header-container {
+.container {
 	width: auto;
 	margin-left: 10%;
 	margin-right: 10%;
@@ -22,4 +22,10 @@ div.tooltip {
 }
 .btn + .btn {
 	margin-top: 8px;
+}
+
+#header-container {
+	margin: auto;
+	padding-top: 100px;
+	padding-bottom: 100px;
 }

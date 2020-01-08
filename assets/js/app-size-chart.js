@@ -83,7 +83,7 @@ $(document).ready(function() {
 	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
                 });
 	            let size = versions[versions.length - 1]["size"];
-	            appSize = Math.max(Math.ceil(Math.log10(size) * 12), 1 + (leftMargin + rightMargin), 1 + (topMargin + bottomMargin));
+	            appSize = Math.max(Math.sqrt(size/8), 1 + (leftMargin + rightMargin), 1 + (topMargin + bottomMargin));
                 defs.append("pattern")
                     .attr("id", appId)
                     .attr("width", 1)

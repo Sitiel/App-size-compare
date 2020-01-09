@@ -1,7 +1,9 @@
-function drawSizeEvolutionChart(apps, apps_to_draw) {
 
+let svg, xScale, yScale, xAxis, yAxis, Color;
+
+function drawSizeEvolutionChart(apps, apps_to_draw) {
 	let sizeEvolutionChart = d3.select("#size-evolution-chart-placeholder").selectAll('*').remove();
-	let svg = d3.select("#size-evolution-chart-placeholder")
+	svg = d3.select("#size-evolution-chart-placeholder")
 		.append("svg")
 		.attr("width", "100%")
 		.attr("height", "800px")
@@ -44,12 +46,12 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 
 
 	// Create scales
-	let xScale = d3.scaleLinear().range([50+leftMargin, width - 50]).domain([
+	xScale = d3.scaleLinear().range([50+leftMargin, width - 50]).domain([
 		d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix())),
 		d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()))]);
-	let yScale = d3.scaleLinear().range([50, height - 100 - bottomMargin]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
+	yScale = d3.scaleLinear().range([50, height - 100 - bottomMargin]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
 
-    let Color = d3.scaleOrdinal()
+	Color = d3.scaleOrdinal()
         .range(["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"])
       .domain(Object.keys(apps));
 
@@ -84,21 +86,78 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 	var tooltip = d3.select("body").append("div")
 		.attr("class", "tooltip")
 		.style("opacity", 0);
-	
+
+	yAxis = d3.axisLeft(yScale)
+
+	xAxis = d3.axisBottom(xScale)
+		.tickFormat(d => moment(new Date(d*1000)).format("DD/MM/YYYY"))
+
 	svg.append("g")
-		.call(d3.axisLeft(yScale))
+		.call(yAxis)
+		.attr("class", "yaxis")
 		.attr("transform", "translate(70, 0)");
 	
 	svg.append("g")
-		.call(d3.axisBottom(xScale)
-			.tickFormat(d => moment(new Date(d*1000)).format("DD/MM/YYYY")))
+		.call(xAxis)
+		.attr("class", "xaxis")
 		.attr("transform", `translate(0, ${height - 100 - bottomMargin})`)
 		.selectAll("text")
 		.attr("transform", "translate(20, 20) rotate(45)");
 
-	for (let appName in apps) {
+	draw_path(apps, apps_to_draw)
+}
+
+
+function draw_path(apps, apps_to_draw){
+
+	// rescaling :
+	apps_to_reshape = []
+	for(let appName in apps){
 		if(apps_to_draw.indexOf(appName) == -1)
+			continue
+		apps_to_reshape.push(apps[appName])
+	}
+	yScale.domain([d3.max(Object.values(apps_to_reshape), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
+	svg.select(".yaxis")
+		.transition().duration(1500)
+		.call(yAxis);
+
+
+    for(let appName in apps){
+        if(apps_to_draw.indexOf(appName) == -1)
+            continue
+
+        let appNameSlug = appName.replace(/\s/g,'')
+        path = svg.select("." + appNameSlug);
+        if(path.empty()){
+            continue;
+        }
+        let versions = apps[appName]["versions"];
+
+        path.datum(versions).transition().duration(1000)
+            .attr("d", d3.line()
+                .x(function (d) {
+                    return xScale(moment(d["date"], "YYYY-MM-DD").unix())
+                })
+                .y(function (d) {
+                    return yScale(parseFloat(d["size"]))
+                }))
+    }
+
+
+	for (let appName in apps) {
+		let appNameSlug = appName.replace(/\s/g,'')
+		app = svg.select("." + appNameSlug);
+		if(apps_to_draw.indexOf(appName) == -1){
+			if(!app.empty()) {
+				app.remove();
+			}
 			continue;
+		}
+		if(!app.empty()) {
+			continue;
+		}
+
 		let versions = apps[appName]["versions"];
 		// Sort versions
 		versions.sort(function (a, b) {
@@ -108,24 +167,25 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		var path = svg.append("path")
 			.datum(versions)
 			.attr("d", d3.line()
-					.x(function (d) {
-						return xScale(moment(d["date"], "YYYY-MM-DD").unix())
-					})
-					.y(function (d) {
-						return yScale(parseFloat(d["size"]))
-					}))
+				.x(function (d) {
+					return xScale(moment(d["date"], "YYYY-MM-DD").unix())
+				})
+				.y(function (d) {
+					return yScale(parseFloat(d["size"]))
+				}))
 			.attr("fill", "none")
 			.attr("stroke", Color(appName))
-			.attr("stroke-width", 3);
+			.attr("stroke-width", 3)
+			.attr("class", appNameSlug)
+            .attr("name", appName)
 
-			var totalLength = path.node().getTotalLength();
+		var totalLength = path.node().getTotalLength();
 
-			path.attr("stroke-dasharray", totalLength + " " + totalLength)
-				.attr("stroke-dashoffset", totalLength)
-				.transition()
-				.duration(1000)
-				.ease(d3.easeLinear)
-				.attr("stroke-dashoffset", 0)
+		path.attr("stroke-dasharray", totalLength + " " + totalLength)
+			.attr("stroke-dashoffset", totalLength)
+			.transition()
+			.duration(1000)
+			.ease(d3.easeLinear)
+			.attr("stroke-dashoffset", 0)
 	}
-
 }

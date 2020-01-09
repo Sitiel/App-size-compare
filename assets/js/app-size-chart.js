@@ -7,6 +7,7 @@ $(document).ready(function() {
 		.append("g");
 	
 	let jappSizeChartPlaceholder = $("#app-size-chart-placeholder");
+
 	let width = jappSizeChartPlaceholder.width();
 	let height = jappSizeChartPlaceholder.height();
 	let leftMargin = 5;
@@ -38,15 +39,15 @@ $(document).ready(function() {
                 categories.push(apps[appName]["categorie"])
             }
         }
-        
+
         const getAppId = function(appName) {
         	return appName.replace(/ /g, '-');
         };
-        
+
         const isAppDisabled = function(appName) {
         	return !includedCategories.includes(apps[appName]["categorie"]) || apps[appName]["os"]!=os;
         };
-        
+
         const onAppClicked = function(appName, force_select = false, force_deselect = false, commit = true) {
         	if (force_select && force_deselect)
         		throw new EvalError("force_select and force_deselect cannot be true at the same time.");
@@ -59,7 +60,7 @@ $(document).ready(function() {
 			        .duration(300)
 			        .style("stroke", Color(appName))
 			        .attr("stroke-width", "5");
-		
+
 		        if (!apps_to_draw.includes(appName))
 		            apps_to_draw.push(appName);
 	        }
@@ -68,20 +69,20 @@ $(document).ready(function() {
 			        .transition()
 			        .duration(300)
 			        .attr("stroke-width", "0");
-		        
+
 		        if (index !== -1)
 			        apps_to_draw.splice(index, 1);
 	        }
-			
+
 	        if (commit)
-		        drawSizeEvolutionChart(apps, apps_to_draw)
+                draw_path(apps, apps_to_draw)
         };
         const deselectAllApps = function(commit = true) {
 	        apps_to_draw = [];
 	        if (commit)
-		        drawSizeEvolutionChart(apps, apps_to_draw)
+                draw_path(apps, apps_to_draw)
         };
-        
+
         includedCategories = categories;
         d3.selectAll(".filter_button").on("change", function() {
             // I *think* "inline" is the default.
@@ -112,12 +113,12 @@ $(document).ready(function() {
             apps_to_draw = []
             drawSizeEvolutionChart(apps, apps_to_draw)
         });
-        
+
         d3.selectAll(".select-all").on('click', function() {
         	for (let appName in apps)
         		if (!isAppDisabled(appName))
 			        onAppClicked(getAppId(appName), true, undefined, false);
-	        drawSizeEvolutionChart(apps, apps_to_draw)
+            draw_path(apps, apps_to_draw)
         });
 		d3.selectAll(".deselect-all").on('click', function() {
 			for (let appName in apps)
@@ -194,13 +195,13 @@ $(document).ready(function() {
                 iter++;
             }
         }
-        
+
         drawSizeEvolutionChart(apps, []);
 		d3.json("data_ios_music.json").then(function (ios_music_apps) {
 			d3.json("data_ios_social_network.json").then(function (ios_social_network_apps) {
 				d3.json("data_ios_video.json").then(function (data_ios_video) {
 					drawAppSizeComparison(apps, {...ios_music_apps, ...ios_social_network_apps, ...data_ios_video});
-createMap(apps);
+                    createMap(apps);
 				});
 			});
 		});

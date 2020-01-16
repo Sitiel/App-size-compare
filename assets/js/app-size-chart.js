@@ -10,10 +10,10 @@ $(document).ready(function() {
 
 	let width = jappSizeChartPlaceholder.width();
 	let height = jappSizeChartPlaceholder.height();
-	let leftMargin = 5;
-	let rightMargin = 5;
-	let topMargin = 5;
-	let bottomMargin = 5;
+	let leftMargin = 1;
+	let rightMargin = 1;
+	let topMargin = 1;
+	let bottomMargin = 1;
 	let defaultTransition = "easeQuad";
 	let defaultTransitionDuration = 200;
 	
@@ -149,22 +149,16 @@ $(document).ready(function() {
 	                versions.sort(function (a, b) {
 	                    return moment(a["date"], "YYYY-MM-JJ").unix() - moment(b["date"], "YYYY-MM-JJ").unix();
                     });
-	                return versions[versions.length - 1]["size"];}}));
+
+	                return parseInt(versions[versions.length - 1]["size"], 10);}}));
             let maxScaled=width/(Math.ceil(Math.sqrt(Object.keys(apps).length/4)))
             let appScale = d3.scaleLinear().range([10, maxScaled])
                 .domain([0,maxSize]);
 
-console.log(width/(Math.ceil(Math.sqrt(Object.keys(apps).length/4))))
-console.log(height)
-
-console.log(width)
-
-console.log(maxSize)
-
 
             iter = 0;
 			lastX = 0;
-			lastY = 0;
+			lastY = 5;
             maxYOfLine = 0;
             for (let appName in apps) {
                 let appObject = apps[appName];
@@ -175,7 +169,7 @@ console.log(maxSize)
 	            versions.sort(function (a, b) {
 	                return moment(a["date"], "YYYY-MM-JJ").unix() - moment(b["date"], "YYYY-MM-JJ").unix();
                 });
-	            let size = versions[versions.length - 1]["size"];
+	            let size = parseInt(versions[versions.length - 1]["size"],10);
 	            let appSize = appScale(Math.sqrt(size));
                 defs.append("pattern")
                     .attr("id", appId)
@@ -186,9 +180,6 @@ console.log(maxSize)
                     .attr("xlink:href", appObject['icon'])
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin));
-                console.log(appName)
-console.log(appSize)
-console.log(Math.sqrt(size))
                 if(lastX + appSize > width){
                     lastX = 0;
                     lastY += maxScaled;

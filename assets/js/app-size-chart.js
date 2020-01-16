@@ -195,15 +195,32 @@ $(document).ready(function() {
                 iter++;
             }
         }
-
-        drawSizeEvolutionChart(apps, []);
-		d3.json("data_ios_music.json").then(function (ios_music_apps) {
-			d3.json("data_ios_social_network.json").then(function (ios_social_network_apps) {
-				d3.json("data_ios_video.json").then(function (data_ios_video) {
-					drawAppSizeComparison(apps, {...ios_music_apps, ...ios_social_network_apps, ...data_ios_video});
-                    createMap(apps);
-				});
-			});
-		});
+		
+		drawSizeEvolutionChart(apps, []);
+        
+        // Convert data to separate android from iOS
+		let android_apps = Object.keys(apps).filter(app => apps[app].os === "android")
+			.reduce((obj, key) => {
+				return {
+					...obj,
+					[key]: apps[key],
+				};
+			}, {});
+		let ios_apps = Object.keys(apps).filter(app => apps[app].os === "ios")
+			// Remove "ios" at the end for ios apps
+			// .map(app => app.substring(0, app.indexOf("-ios")))
+			.reduce((obj, key) => {
+				let key_name = `${key}`;
+				// Remove "ios" at the end for ios apps
+				if (key != null)
+					key_name = key.substring(0, key.indexOf("-ios"));
+				return {
+					...obj,
+					[key_name]: apps[key],
+				};
+			}, {});
+		
+		drawAppSizeComparison(android_apps, ios_apps);
+		createMap(apps);
 	});
 });

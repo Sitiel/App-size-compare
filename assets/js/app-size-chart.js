@@ -140,10 +140,28 @@ $(document).ready(function() {
 
 		function createMap(apps) {
 
-            let maxSize = Math.sqrt(d3.max(Object.values(apps), function(app){if(app["os"]!=os){return 0;}else{return app["versions"][app["versions"].length - 1]["size"];}}));
-            let appScale = d3.scaleLinear().range([10, (width/7)*(os=="android") + (width/6)*(os=="ios")])
-                .domain([0,Math.sqrt(d3.max(Object.values(apps), function(app){
-                    if(app["os"]!=os){return 0;}else{return app["versions"][app["versions"].length - 1]["size"];}}))]);
+
+            let maxSize = Math.sqrt(d3.max(Object.values(apps), function(app){
+                if(app["os"]!=os){
+                    return 0;
+                }else{
+                    let versions = app["versions"];
+	                versions.sort(function (a, b) {
+	                    return moment(a["date"], "YYYY-MM-JJ").unix() - moment(b["date"], "YYYY-MM-JJ").unix();
+                    });
+	                return versions[versions.length - 1]["size"];}}));
+            let maxScaled=width/(Math.ceil(Math.sqrt(Object.keys(apps).length/4)))
+            let appScale = d3.scaleLinear().range([10, maxScaled])
+                .domain([0,maxSize]);
+
+console.log(width/(Math.ceil(Math.sqrt(Object.keys(apps).length/4))))
+console.log(height)
+
+console.log(width)
+
+console.log(maxSize)
+
+
             iter = 0;
 			lastX = 0;
 			lastY = 0;
@@ -155,7 +173,7 @@ $(document).ready(function() {
                 let appId = getAppId(appName);
                 let versions = appObject.versions;
 	            versions.sort(function (a, b) {
-	                return moment(a["date"], "DD-MM-YYYY").unix() - moment(b["date"], "DD-MM-YYYY").unix();
+	                return moment(a["date"], "YYYY-MM-JJ").unix() - moment(b["date"], "YYYY-MM-JJ").unix();
                 });
 	            let size = versions[versions.length - 1]["size"];
 	            let appSize = appScale(Math.sqrt(size));
@@ -168,10 +186,12 @@ $(document).ready(function() {
                     .attr("xlink:href", appObject['icon'])
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin));
-
+                console.log(appName)
+console.log(appSize)
+console.log(Math.sqrt(size))
                 if(lastX + appSize > width){
                     lastX = 0;
-                    lastY += maxSize;
+                    lastY += maxScaled;
                     maxYOfLine = appSize;
                 }
                 if(appSize > maxYOfLine){
@@ -183,8 +203,8 @@ $(document).ready(function() {
 	                .attr("id", appId + "-app")
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin))
-                     .attr("x", lastX + leftMargin + (maxSize/2-appSize/2))
-                     .attr("y", lastY + bottomMargin + + (maxSize/2-appSize/2))
+                     .attr("x", lastX + leftMargin + (maxScaled/2-appSize/2))
+                     .attr("y", lastY + bottomMargin + + (maxScaled/2-appSize/2))
                     .style("fill", `url(#${appId})`)
                     .on("mouseover", function(_) {
                         tooltip
@@ -204,7 +224,7 @@ $(document).ready(function() {
                     .on("click", function(){
                         onAppClicked(appName);
                     });
-                lastX += maxSize;
+                lastX += maxScaled;
                 iter++;
             }
         }

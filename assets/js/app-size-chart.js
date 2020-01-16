@@ -97,10 +97,10 @@ $(document).ready(function() {
                 update = true
             }
             if(update) {
-                defs.selectAll("pattern").remove()
-                svg.selectAll("rect").remove()
+                defs.selectAll("pattern").remove();
+                svg.selectAll("rect").remove();
                 createMap(apps)
-                apps_to_draw = []
+                apps_to_draw = [];
                 drawSizeEvolutionChart(apps, apps_to_draw)
             }
             });
@@ -126,8 +126,20 @@ $(document).ready(function() {
 			deselectAllApps();
 		});
 
+        function resize() {
+            width = jappSizeChartPlaceholder.width();
+            height = jappSizeChartPlaceholder.height();
+            defs.selectAll("pattern").remove()
+            svg.selectAll("rect").remove()
+            createMap(apps)
+            drawAppSizeComparison(apps);
+        }
+
+        window.onresize = resize;
+
 		function createMap(apps) {
 
+            let maxSize = Math.sqrt(d3.max(Object.values(apps), function(app){if(app["os"]!=os){return 0;}else{return app["versions"][app["versions"].length - 1]["size"];}}));
             let appScale = d3.scaleLinear().range([10, (width/7)*(os=="android") + (width/6)*(os=="ios")])
                 .domain([0,Math.sqrt(d3.max(Object.values(apps), function(app){
                     if(app["os"]!=os){return 0;}else{return app["versions"][app["versions"].length - 1]["size"];}}))]);
@@ -158,7 +170,7 @@ $(document).ready(function() {
 
                 if(lastX + appSize > width){
                     lastX = 0;
-                    lastY += maxYOfLine;
+                    lastY += maxSize;
                     maxYOfLine = appSize;
                 }
                 if(appSize > maxYOfLine){
@@ -170,8 +182,8 @@ $(document).ready(function() {
 	                .attr("id", appId + "-app")
                     .attr("width", appSize - (leftMargin + rightMargin))
                     .attr("height", appSize - (topMargin + bottomMargin))
-                     .attr("x", lastX + leftMargin)
-                     .attr("y", lastY + bottomMargin)
+                     .attr("x", lastX + leftMargin + (maxSize/2-appSize/2))
+                     .attr("y", lastY + bottomMargin + + (maxSize/2-appSize/2))
                     .style("fill", `url(#${appId})`)
                     .on("mouseover", function(_) {
                         tooltip
@@ -191,36 +203,13 @@ $(document).ready(function() {
                     .on("click", function(){
                         onAppClicked(appName);
                     });
-                lastX += appSize;
+                lastX += maxSize;
                 iter++;
             }
         }
-		
-		drawSizeEvolutionChart(apps, []);
-        
-        // Convert data to separate android from iOS
-		let android_apps = Object.keys(apps).filter(app => apps[app].os === "android")
-			.reduce((obj, key) => {
-				return {
-					...obj,
-					[key]: apps[key],
-				};
-			}, {});
-		let ios_apps = Object.keys(apps).filter(app => apps[app].os === "ios")
-			// Remove "ios" at the end for ios apps
-			// .map(app => app.substring(0, app.indexOf("-ios")))
-			.reduce((obj, key) => {
-				let key_name = `${key}`;
-				// Remove "ios" at the end for ios apps
-				if (key != null)
-					key_name = key.substring(0, key.indexOf("-ios"));
-				return {
-					...obj,
-					[key_name]: apps[key],
-				};
-			}, {});
-		
-		drawAppSizeComparison(android_apps, ios_apps);
-		createMap(apps);
+        drawAppSizeComparison(apps);
+        drawSizeEvolutionChart(apps, []);
+        createMap(apps);
 	});
+
 });

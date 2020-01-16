@@ -56,30 +56,6 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
       .domain(Object.keys(apps));
 
 
-// Add one dot in the legend for each name.
-	var size = 20
-	svg.selectAll("mydots")
-		.data(apps_to_draw)
-		.enter()
-		.append("rect")
-		.attr("x", 60+leftMargin)
-		.attr("y", function(d,i){ return 50 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
-		.attr("width", size)
-		.attr("height", size)
-		.style("fill", function(d){ return Color(d)})
-
-// Add one dot in the legend for each name.
-	svg.selectAll("mylabels")
-		.data(apps_to_draw)
-		.enter()
-		.append("text")
-		.attr("x", 60 + size*1.2+ leftMargin)
-		.attr("y", function(d,i){ return 50 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-		.style("fill", function(d){ return Color(d)})
-		.text(function(d){ return d})
-		.attr("text-anchor", "left")
-		.style("alignment-baseline", "middle")
-
 	let defs = svg.append("defs");
 	
 	// Define the div for the tooltip
@@ -109,6 +85,37 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 
 
 function draw_path(apps, apps_to_draw){
+
+	// Add one dot in the legend for each name.
+	var size = 20
+	svg.selectAll(".legend")
+		.remove()
+
+	svg.selectAll("mydots")
+		.data(apps_to_draw)
+		.enter()
+		.append("rect")
+		.attr("x", 80)
+		.attr("y", function(d,i){ return 50 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("width", size)
+		.attr("height", size)
+		.attr("class", "legend")
+		.style("fill", function(d){ return Color(d)})
+
+// Add one dot in the legend for each name.
+
+	svg.selectAll("mylabels")
+		.data(apps_to_draw)
+		.enter()
+		.append("text")
+		.attr("x", 60 + size*1.2+ 20)
+		.attr("y", function(d,i){ return 50 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("class", "legend")
+		.style("fill", function(d){ return Color(d)})
+		.text(function(d){ return d})
+		.attr("text-anchor", "left")
+		.style("alignment-baseline", "middle")
+
 
 	// rescaling :
 	apps_to_reshape = []

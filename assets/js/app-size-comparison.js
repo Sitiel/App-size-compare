@@ -1,4 +1,4 @@
-function drawAppSizeComparison(android_apps, ios_apps) {
+function drawAppSizeComparison(apps) {
 	let android_data = [];
 	let ios_data = [];
 	
@@ -13,13 +13,31 @@ function drawAppSizeComparison(android_apps, ios_apps) {
 				});
 				
 				data.push({
-					axis: appName,
+					axis: apps[appName]['appName'],
 					value: parseFloat(versions[versions.length - 1]["size"]),
 				});
 			}
 		}
 		return data;
 	};
+
+	function filter_apps(apps){
+	    var filtered_apps_android = []
+        var filtered_apps_ios = []
+	    for(var i in apps){
+	        apps[i]['appName'] = i.replace("-ios", "");
+	        if(apps[i].os == 'ios')
+                filtered_apps_ios.push(apps[i]);
+            else
+                filtered_apps_android.push(apps[i]);
+        }
+	    return [filtered_apps_android, filtered_apps_ios]
+    }
+
+    var tmp = filter_apps(apps);
+
+    var android_apps = tmp[0];
+    var ios_apps = tmp[1];
 	
 	android_data = convert_apps_to_data(android_apps);
 	ios_data = convert_apps_to_data(ios_apps);
@@ -27,14 +45,97 @@ function drawAppSizeComparison(android_apps, ios_apps) {
 	// Check if there are app that are present only in android or ios, and delete them
 	android_data = android_data.filter(datum => ios_data.map(ios => ios.axis).includes(datum.axis));
 	ios_data = ios_data.filter(datum => android_data.map(android => android.axis).includes(datum.axis));
+
+	console.log(tmp);
 	
 	// Sort data arrays
 	// android_data.sort((a, b) => a["value"] - b["value"]);
 	// ios_data.sort((a, b) => a["value"] - b["value"]);
-	
-	RadarChart.draw("#app-size-comparison-placeholder", [android_data, ios_data], {
-		w: 400,
-		h: 400,
-		legends: ["Android", "iOS"]
-	});
+
+	var dataset = []
+	for(var k = 0 ; k < 2 ; k++) {
+		var serie = []
+		for (var i = 0; i < android_data.length; i++) {
+			for (var j = 0; j < ios_data.length; j++) {
+				if (ios_data[j].axis == android_data[i].axis) {
+					if(k == 0){
+						serie.push({
+							'axis': android_data[i].axis,
+							'y0': 0,
+							'y1': android_data[i].value,
+							'type': 'android'
+						})
+					}else{
+						serie.push({
+							'axis': android_data[i].axis,
+							'y0': android_data[i].value,
+							'y1': ios_data[i].value,
+							'type': 'ios'
+						})
+					}
+
+				}
+			}
+		}
+		dataset.push(serie)
+	}
+
+    d3.select("#app-size-comparison-placeholder").selectAll('*').remove();
+
+	let appSizeCompPlaceholder = d3.select("#app-size-comparison-placeholder");
+	let svg = d3.select("#app-size-comparison-placeholder")
+		.append("svg")
+		.attr("width", "100%")
+		.attr("height", "600")
+		.append("g");
+
+	let jappSizeCompPlaceholder = $("#app-size-comparison-placeholder");
+	let width = jappSizeCompPlaceholder.width();
+	let height = jappSizeCompPlaceholder.height();
+	height = 500;
+
+	const x = d3.scaleBand()
+		.range([50, width])
+		.padding(0.1);
+
+	const y = d3.scaleLinear()
+		.range([height, 0]);
+
+	console.log(android_data)
+
+	x.domain(android_data.map(function(d) { return d.axis; }));
+	y.domain([0, d3.max(ios_data, function(d) { return d.value; })]);
+
+	var colors = {'ios': "#ff7c43", 'android': "#003f5c"};
+
+	svg.append("g")
+		.attr("transform", "translate(0," + height + ")")
+		.call(d3.axisBottom(x).tickSize(0))
+		.selectAll("text")
+		.style("text-anchor", "end")
+		.attr("dx", "-.8em")
+		.attr("dy", ".15em")
+		.attr("transform", "rotate(-65)");
+
+
+	svg.append("g")
+		.call(d3.axisLeft(y).ticks(6))
+		.attr("transform", "translate(50,0)")
+
+
+	svg.append("g")
+		.selectAll("g")
+		.data(dataset)
+		.join("g")
+		.selectAll("rect")
+		.data(d => d)
+		.join("rect")
+		.attr("fill", function(d){
+			return colors[d.type];
+		})
+		.attr("x", function(d) { return x(d.axis); })
+		.attr("y", d => y(d.y1))
+		.attr("height", d => y(d.y0) - y(d.y1))
+		.attr("width", x.bandwidth());
+
 }

@@ -222,6 +222,11 @@ $(document).ready(function() {
         drawAppSizeComparison(apps);
         drawSizeEvolutionChart(apps, []);
         createMap(apps);
+        onAppClicked("Facebook")
+        onAppClicked("Facebook Lite")
+        onAppClicked("Instagram")
+        onAppClicked("Messenger")
+        onAppClicked("Twitter")
 	});
 
 });

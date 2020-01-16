@@ -1,6 +1,6 @@
 {
     "Discord": {
-        "icon": "https://image.winudf.com/v2/image1/Y29tLmRpc2NvcmRfaWNvbl8xNTU0MDY5NjU3XzAyMQ/icon.png?w=170&fakeurl=1",
+        "icon": "https://www.freeiconspng.com/uploads/discord-metro-style-icon-0.png",
         "versions": [
             {
             "date": "2019-12-18",
@@ -37,12 +37,12 @@
         ]
     },
     "Instagram Lite": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2018/06/Instagram-Lite-APK-85x85.png",
+        "icon": "assets/img/Instagram-Lite-icon.jpg",
         "versions": [
         ]
     },
     "LinkedIn": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2017/03/LinkedIn-APK-85x85.png",
+        "icon": "http://www.wp7connect.com/wp-content/uploads/2012/05/LinkedIn.png",
         "versions": [
             {
             "date": "2020-01-02",
@@ -56,7 +56,7 @@
         ]
     },
     "Messenger": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2014/11/facebook-messenger-apk-85x85.png",
+        "icon": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Ffiles.softicons.com%2Fdownload%2Fandroid-icons%2Fmaximal-square-icons-by-fritz-franke%2Fpng%2F128x128%2Fmessenger.png&f=1&nofb=1",
         "versions": [
             {
             "date": "2019-12-18",

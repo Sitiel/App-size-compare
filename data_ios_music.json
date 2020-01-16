@@ -1,6 +1,6 @@
  {
     "Amazon Music": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2017/11/Amazon-Music-APK-1-85x85.png",
+        "icon": "https://images-na.ssl-images-amazon.com/images/I/41VXGF76krL._SY300_QL70_.jpg",
         "versions": [
             {
             "date": "2019-12-30",
@@ -9,7 +9,7 @@
         ]
     },
     "Apple Music": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2016/07/Apple-Music-APK-85x85.png",
+        "icon": "https://i.pinimg.com/originals/59/f9/31/59f93175ba67187444ad6ae3b35e040f.png",
         "versions": [
             {
             "date": "2019-11-21",
@@ -27,7 +27,7 @@
         ]
     },
     "Google Play Music": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2017/01/Google-play-Music-APK-85x85.png",
+        "icon": "assets/img/Google_Play_Music.0.0.jpg",
         "versions": [
             {
             "date": "2019-12-19",
@@ -36,7 +36,7 @@
         ]
     },
      "Shazam": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/Shazam-apk-85x85.png",
+        "icon": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.f5YeOae3AsKx8FPtDpo-sgAAAA%26pid%3DApi&f=1",
         "versions": [
             {
             "date": "2019-12-09",
@@ -45,7 +45,7 @@
         ]
     },
     "Spotify": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2016/06/Spotify-Music-APK-85x85.png",
+        "icon": "https://d23sy9fe9womrt.cloudfront.net/7/25917_lg.jpg",
         "versions": [
             {
             "date": "2019-12-02",
@@ -54,7 +54,7 @@
         ]
     },
      "Youtube Music": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2016/06/YouTube-Music-apk-85x85.png",
+        "icon": "https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/4a/56/45/4a5645fb-aee1-7932-45b6-0752bbd95395/source/512x512bb.jpg",
         "versions": [
             {
             "date": "2020-01-02",

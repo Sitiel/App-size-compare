@@ -1,6 +1,6 @@
 {
     "Dailymotion": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2016/12/dailymotion-APK-85x85.png",
+        "icon": "https://lh3.googleusercontent.com/lHKK6GRs9gR825puaCxYWagzugkIbnfrmWGnGHILEsGvdQZlauXsmyI2QMisD1cFSA=w300",
         "versions": [
             {
                 "date": "2017-12-15",
@@ -81,7 +81,7 @@
         ]
     },
     "OGYoutube": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2017/01/OGYoutube-APK-85x85.png",
+        "icon": "https://www.cals.msstate.edu/images/icons/YouTube-social-square-red.png",
         "versions": [
             {
                 "date": "2017-01-21",
@@ -247,7 +247,7 @@
         ]
     },
     "Youtube": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2015/01/YouTube-APK-85x85.png",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/600px-YouTube_social_white_square_%282017%29.svg.png",
         "versions": [
             {
                 "date": "2015-01-01",
@@ -1316,7 +1316,7 @@
         ]
     },
     "Youtube Go": {
-        "icon": "https://androidapksfree.com/wp-content/uploads/2017/02/Yutube-Go-APK-85x85.png",
+        "icon": "assets/img/youtubego.jpg",
         "versions": [
             {
                 "date": "2017-04-07",

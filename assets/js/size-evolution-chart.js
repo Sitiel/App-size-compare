@@ -2,6 +2,7 @@
 let svg, xScale, yScale, xAxis, yAxis, Color;
 
 function drawSizeEvolutionChart(apps, apps_to_draw) {
+	console.log("redraw");
 	let sizeEvolutionChart = d3.select("#size-evolution-chart-placeholder").selectAll('*').remove();
 	svg = d3.select("#size-evolution-chart-placeholder")
 		.append("svg")

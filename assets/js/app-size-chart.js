@@ -132,6 +132,7 @@ $(document).ready(function() {
             defs.selectAll("pattern").remove()
             svg.selectAll("rect").remove()
             createMap(apps)
+            drawSizeEvolutionChart(apps, apps_to_draw);
             drawAppSizeComparison(apps);
         }
 

@@ -69,5 +69,6 @@ No license on this project yet...
 ## 🤝 Acknowledgments
 
 * Nadieh Bremer for [RadarGraph.js](http://bl.ocks.org/nbremer/21746a9668ffdf6d8242) (D3.js-compatible graph). Its license can be found [here](https://github.com/Sitiel/dataviz_6/blob/master/assets/js/RadarGraph-LICENSE.txt).
-* [androidapksfree.com](https://androidapksfree.com/) for the size of the applications and history
+* [androidapksfree.com](https://androidapksfree.com/) for the size of the applications and history on Android.
+* [Apkpure](https://apkpure.com/) for the size of the applications and history on Android.
 * [Apple - App Store](https://www.apple.com/ios/app-store/) for the size of the applications on iOS.

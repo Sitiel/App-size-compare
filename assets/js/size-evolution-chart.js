@@ -133,8 +133,7 @@ function draw_path(apps, apps_to_draw){
 		apps_to_reshape.push(apps[appName])
 	}
 	yScale.domain([d3.max(Object.values(apps_to_reshape), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
-	svg.select(".yaxis")
-		.transition().duration(1500)
+	svg.select(".yaxis").transition().duration(1500)
 		.call(yAxis);
 
 
@@ -148,7 +147,9 @@ function draw_path(apps, apps_to_draw){
             continue;
         }
         let versions = apps[appName]["versions"];
-
+		versions.sort(function (a, b) {
+			return moment(a["date"], "YYYY-MM-DD").unix() - moment(b["date"], "YYYY-MM-DD").unix();
+		});
         path.datum(versions).transition().duration(500)
             .attr("d", d3.line()
                 .x(function (d) {
@@ -173,6 +174,8 @@ function draw_path(apps, apps_to_draw){
 			continue;
 		}
 
+
+
 		let versions = apps[appName]["versions"];
 		// Sort versions
 		versions.sort(function (a, b) {
@@ -194,12 +197,12 @@ function draw_path(apps, apps_to_draw){
 			.attr("class", appNameSlug)
             .attr("name", appName)
 
-		var totalLength = path.node().getTotalLength();
+		var totalLength = path.node().getTotalLength()*10;
 
 		path.attr("stroke-dasharray", totalLength + " " + totalLength)
 			.attr("stroke-dashoffset", totalLength)
 			.transition()
-			.duration(500)
+			.duration(2000)
 			.ease(d3.easeLinear)
 			.attr("stroke-dashoffset", 0)
 	}

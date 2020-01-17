@@ -45,7 +45,7 @@ $(document).ready(function() {
         };
 
         const isAppDisabled = function(appName) {
-        	return !includedCategories.includes(apps[appName]["categorie"]) || apps[appName]["os"]!=os;
+        	return apps[appName]["os"]!=os;
         };
 
         const onAppClicked = function(appName, force_select = false, force_deselect = false, commit = true) {
@@ -86,24 +86,17 @@ $(document).ready(function() {
         includedCategories = categories;
         d3.selectAll(".filter_button").on("change", function() {
             // I *think* "inline" is the default.
-            var update = false
+            categorie = this.value
             
-            if(d3.selectAll(`#${this.id}`).property("checked") && !categories.includes(this.id)) {
-                categories.push(this.id)
-                update = true
-            }
-            if(!d3.selectAll(`#${this.id}`).property("checked") && categories.includes(this.id)) {
-                categories.splice( categories.indexOf(this.id), 1 )
-                update = true
-            }
-            if(update) {
-                defs.selectAll("pattern").remove();
-                svg.selectAll("rect").remove();
-                createMap(apps)
-                apps_to_draw = [];
-                drawSizeEvolutionChart(apps, apps_to_draw)
-            }
+            for (let appName in apps)
+                onAppClicked(appName, undefined, true, false);
+            deselectAllApps();
+            for (let appName in apps)
+                if (!isAppDisabled(appName) && apps[appName]["categorie"] == categorie)
+                    onAppClicked(appName, true, undefined, false);
+            draw_path(apps, apps_to_draw)
             });
+        
         
         d3.selectAll(".select_os").on("change", function() {
             os = this.value
@@ -117,12 +110,12 @@ $(document).ready(function() {
         d3.selectAll(".select-all").on('click', function() {
         	for (let appName in apps)
         		if (!isAppDisabled(appName))
-			        onAppClicked(getAppId(appName), true, undefined, false);
+			        onAppClicked(appName, true, undefined, false);
             draw_path(apps, apps_to_draw)
         });
 		d3.selectAll(".deselect-all").on('click', function() {
 			for (let appName in apps)
-				onAppClicked(getAppId(appName), undefined, true, false);
+				onAppClicked(appName, undefined, true, false);
 			deselectAllApps();
 		});
 

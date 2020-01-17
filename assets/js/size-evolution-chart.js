@@ -1,7 +1,6 @@
 let svg, xScale, yScale, xAxis, yAxis, Color;
 
 function drawSizeEvolutionChart(apps, apps_to_draw) {
-	console.log("redraw");
 	let sizeEvolutionChart = d3.select("#size-evolution-chart-placeholder").selectAll('*').remove();
 	svg = d3.select("#size-evolution-chart-placeholder")
 		.append("svg")
@@ -53,7 +52,6 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 		]);
 
 	//xScale = xScale.ticks(d3.timeMinute, 15);
-	console.log("x :", xScale);
 
 	yScale = d3.scaleLinear().range([50, height - 100 - bottomMargin]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
 

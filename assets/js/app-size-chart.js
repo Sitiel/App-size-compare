@@ -19,7 +19,9 @@ $(document).ready(function() {
 	
 	let defs = svg.append("defs");
 	let apps_to_draw = []
-	
+
+
+    document.getElementById('android').checked = true;
 	var os = "android"
     
     $("input:checkbox").on('click', function() {
@@ -117,6 +119,11 @@ $(document).ready(function() {
         
         d3.selectAll(".select_os").on("change", function() {
             os = this.value
+            if (os == 'ios'){
+                document.getElementById('size-evolution-chart-placeholder').innerHTML = "Impossible d'afficher le graphique : <br>Apple ne fournit pas l'historique des tailles de mise à jour des applications ios.";
+                return;
+            }
+            document.getElementById('size-evolution-chart-placeholder').innerHTML = '';
             defs.selectAll("pattern").remove()
             svg.selectAll("rect").remove()
             createMap(apps)

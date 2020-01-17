@@ -1,6 +1,6 @@
 # Dataviz - Applications Memory Consumption
 
-![Dataviz Cover - A simplified version of our main visualization](./image/cover/dataviz_6_cover.png)
+![Dataviz Cover - A simplified version of our main visualization](thumbnail.png)
 
 The memory of our phone is often perceived as an element limiting the functionality of our devices, preventing us from installing certain applications that have sometimes become too greedy in terms of space. It's also becoming increasingly difficult to update all the applications due to their increasing size. But how much does this size change over the months? Are there alternatives, lighter apps to replace the ones we can't keep anymore? Is the size difference between applications important between Android and iOS phones?
 

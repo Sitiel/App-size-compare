@@ -46,8 +46,6 @@ function drawAppSizeComparison(apps) {
 	android_data = android_data.filter(datum => ios_data.map(ios => ios.axis).includes(datum.axis));
 	ios_data = ios_data.filter(datum => android_data.map(android => android.axis).includes(datum.axis));
 
-	console.log(tmp);
-	
 	// Sort data arrays
 	// android_data.sort((a, b) => a["value"] - b["value"]);
 	// ios_data.sort((a, b) => a["value"] - b["value"]);
@@ -101,12 +99,41 @@ function drawAppSizeComparison(apps) {
 	const y = d3.scaleLinear()
 		.range([height, 0]);
 
-	console.log(android_data)
 
 	x.domain(android_data.map(function(d) { return d.axis; }));
 	y.domain([0, d3.max(ios_data, function(d) { return d.value; })]);
 
 	var colors = {'ios': "#ff7c43", 'android': "#003f5c"};
+
+
+	var size = 20
+	svg.selectAll(".legend")
+		.remove()
+
+	svg.selectAll("mydots")
+		.data(['android', 'ios'])
+		.enter()
+		.append("rect")
+		.attr("x", width - 100)
+		.attr("y", function(d,i){ return 50 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("width", size)
+		.attr("height", size)
+		.attr("class", "legend")
+		.style("fill", function(d){ return colors[d]})
+
+// Add one dot in the legend for each name.
+
+	svg.selectAll("mylabels")
+		.data(['android', 'ios'])
+		.enter()
+		.append("text")
+		.attr("x", (width-75))
+		.attr("y", function(d,i){ return 50 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+		.attr("class", "legend")
+		.style("fill", function(d){ return colors[d]})
+		.text(function(d){ return d})
+		.attr("text-anchor", "left")
+		.style("alignment-baseline", "middle")
 
 	svg.append("g")
 		.attr("transform", "translate(0," + height + ")")

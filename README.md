@@ -1,10 +1,16 @@
-# Dataviz - Applications Memory Consumption
+# [Dataviz - Applications Memory Consumption](https://github.com/Sitiel/dataviz_6)
 
 ![Dataviz Cover - A simplified version of our main visualization](thumbnail.png)
 
 The memory of our phone is often perceived as an element limiting the functionality of our devices, preventing us from installing certain applications that have sometimes become too greedy in terms of space. It's also becoming increasingly difficult to update all the applications due to their increasing size. But how much does this size change over the months? Are there alternatives, lighter apps to replace the ones we can't keep anymore? Is the size difference between applications important between Android and iOS phones?
 
 This school project aim is to, through a web page, visualize and clarify those questions that users find it difficult to outline with their device.
+
+***
+
+This project has been developed as a part of the course **Data Visualization**, taught at the [Université Lyon 1](https://www.univ-lyon1.fr/) ([Master in Artificial Intelligence](http://master-info.univ-lyon1.fr/IA/)). The course can be found [here](https://lyondataviz.github.io/teaching/lyon1-m2/2019/).
+
+***
 
 ## 🔌 Getting Started
 

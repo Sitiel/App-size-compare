@@ -1,4 +1,4 @@
-# [Dataviz - Applications Memory Consumption](https://github.com/Sitiel/dataviz_6)
+# [Dataviz - Applications Memory Consumption](https://github.com/Sitiel/App-size-compare)
 
 ![Dataviz Cover - Une version simplifiée de notre visualisation principale](thumbnail.png)
 
@@ -10,7 +10,7 @@ La mémoire de notre téléphone est souvent perçue comme un élément limitant
 
 Ce projet universitaire a pour but de visualiser et de clarifier, à travers une page Web, les questions que les utilisateurs ont du mal à cerner avec leur appareil.
 
-Le site web peut être trouvé ici : https://github.com/Sitiel/dataviz_6
+Le site web peut être trouvé ici : https://sitiel.github.io/App-size-compare/
 
 ![Teaser de notre page web](teaser.gif)
 
@@ -33,21 +33,21 @@ Ce projet est une page Web en HTML, avec CSS et JavaScript. Assurez-vous d'avoir
 La première étape consiste à cloner le projet:
 
 ```bash
-git clone https://github.com/Sitiel/dataviz_6.git
+git clone https://github.com/Sitiel/App-size-compare.git
 ```
 
 ### 🐘 Exécution (PHP)
 
 Bien que le projet ne soit composé que de fichiers HTML, CSS et JavaScript, la librairie D3.js nécessite des fichiers locaux qui ne peuvent être chargés uniquement via des protocoles Web pour des raisons de sécurité. Ainsi, la page Web doit être lancée à partir d'un serveur, par exemple XAMPP, LAMP ou WAMP.
 
-Si vous possédez une de ces applications, placez le projet dans le dossier `{xampp_lamp_wamp_directory}/htdocs`, où `{xampp_lamp_wamp_directory}` est le répertoire d'installation. Vous pouvez ensuite démarrer le serveur et accéder à la page Web à l'aide de [`http://localhost/`](http://localhost/) ou [`http://localhost/dataviz_6`](http://localhost/dataviz_6) selon la façon dont vous avez copié les fichiers.
+Si vous possédez une de ces applications, placez le projet dans le dossier `{xampp_lamp_wamp_directory}/htdocs`, où `{xampp_lamp_wamp_directory}` est le répertoire d'installation. Vous pouvez ensuite démarrer le serveur et accéder à la page Web à l'aide de [`http://localhost/`](http://localhost/) ou [`http://localhost/App-size-compare`](http://localhost/App-size-compare) selon la façon dont vous avez copié les fichiers.
 
 ### 🐳 Exécution (Docker)
 
 Si Docker est installé sur votre machine, vous pouvez également l'utiliser pour démarrer l'application, avec une simple commande :
 
 ```bash
-cd dataviz_6
+cd App-size-compare
 docker-compose up
 ```
 
@@ -84,7 +84,7 @@ Pas encore de licence sur ce projet...
 
 ## 🤝 Remerciements
 
-* Nadieh Bremer pour [RadarGraph.js](http://bl.ocks.org/nbremer/21746a9668ffdf6d8242) (graph compatible avec D3.js). Sa licence peut être trouvée [ici](https://github.com/Sitiel/dataviz_6/blob/master/assets/js/RadarGraph-LICENSE.txt).
+* Nadieh Bremer pour [RadarGraph.js](http://bl.ocks.org/nbremer/21746a9668ffdf6d8242) (graph compatible avec D3.js). Sa licence peut être trouvée [ici](https://github.com/Sitiel/App-size-compare/blob/master/assets/js/RadarGraph-LICENSE.txt).
 * [androidapksfree.com](https://androidapksfree.com/) pour la taille des applications et leur historique sur Android.
 * [Apkpure](https://apkpure.com/) pour la taille des applications et leur historique sur Android.
 * [Apple - App Store](https://www.apple.com/ios/app-store/) pour la taille des applications sur iOS.

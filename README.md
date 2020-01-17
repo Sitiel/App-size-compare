@@ -72,3 +72,4 @@ No license on this project yet...
 * [androidapksfree.com](https://androidapksfree.com/) for the size of the applications and history on Android.
 * [Apkpure](https://apkpure.com/) for the size of the applications and history on Android.
 * [Apple - App Store](https://www.apple.com/ios/app-store/) for the size of the applications on iOS.
+* [Bootstrap Studio](https://bootstrapstudio.io/) for the HTML, CSS and Bootstrap template.

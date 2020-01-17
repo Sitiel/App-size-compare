@@ -21,6 +21,22 @@ $(document).ready(function() {
 	let apps_to_draw = []
 	
 	var os = "android"
+    
+    $("input:checkbox").on('click', function() {
+    // in the handler, 'this' refers to the box clicked on
+    var $box = $(this);
+    if ($box.is(":checked")) {
+        // the name of the box is retrieved using the .attr() method
+        // as it is assumed and expected to be immutable
+        var group = "input:checkbox[name='" + $box.attr("name") + "']";
+        // the checked state of the group/box on the other hand will change
+        // and the current value is retrieved using .prop() method
+        $(group).prop("checked", false);
+        $box.prop("checked", true);
+    } else {
+        $box.prop("checked", false);
+    }
+});
 	
 	// Define the div for the tooltip
 	var tooltip = d3.select("body").append("div")
@@ -83,18 +99,19 @@ $(document).ready(function() {
                 draw_path(apps, apps_to_draw)
         };
 
-        includedCategories = categories;
         d3.selectAll(".filter_button").on("change", function() {
             // I *think* "inline" is the default.
+            
             categorie = this.value
             
             for (let appName in apps)
                 onAppClicked(appName, undefined, true, false);
             deselectAllApps();
-            for (let appName in apps)
-                if (!isAppDisabled(appName) && apps[appName]["categorie"] == categorie)
-                    onAppClicked(appName, true, undefined, false);
-            draw_path(apps, apps_to_draw)
+           if(($(this).is(":checked")))
+                for (let appName in apps)
+                    if (!isAppDisabled(appName) && apps[appName]["categorie"] == categorie)
+                        onAppClicked(appName, true, undefined, false);
+                draw_path(apps, apps_to_draw)
             });
         
         

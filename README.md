@@ -10,6 +10,8 @@ The memory of our phone is often perceived as an element limiting the functional
 
 This school project aim is to, through a web page, visualize and clarify those questions that users find it difficult to outline with their device.
 
+The website can be found here: https://github.com/Sitiel/dataviz_6
+
 ![Teaser of our web page](teaser.gif)
 
 ***

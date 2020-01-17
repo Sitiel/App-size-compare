@@ -10,6 +10,8 @@ La mémoire de notre téléphone est souvent perçue comme un élément limitant
 
 Ce projet universitaire a pour but de visualiser et de clarifier, à travers une page Web, les questions que les utilisateurs ont du mal à cerner avec leur appareil.
 
+Le site web peut être trouvé ici : https://github.com/Sitiel/dataviz_6
+
 ![Teaser de notre page web](teaser.gif)
 
 ***

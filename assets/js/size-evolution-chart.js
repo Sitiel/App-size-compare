@@ -149,7 +149,7 @@ function draw_path(apps, apps_to_draw){
         }
         let versions = apps[appName]["versions"];
 
-        path.datum(versions).transition().duration(1000)
+        path.datum(versions).transition().duration(500)
             .attr("d", d3.line()
                 .x(function (d) {
                     return xScale(moment(d["date"], "YYYY-MM-DD").unix()*1000)
@@ -199,7 +199,7 @@ function draw_path(apps, apps_to_draw){
 		path.attr("stroke-dasharray", totalLength + " " + totalLength)
 			.attr("stroke-dashoffset", totalLength)
 			.transition()
-			.duration(1000)
+			.duration(500)
 			.ease(d3.easeLinear)
 			.attr("stroke-dashoffset", 0)
 	}

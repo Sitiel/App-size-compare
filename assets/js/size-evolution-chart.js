@@ -46,10 +46,15 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 
 
 	// Create scales
-	xScale = d3.scaleLinear().range([50+leftMargin, width - 50]).domain([
-		d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix())),
-		d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()))])
-        ;
+	xScale = d3.scaleTime().range([50+leftMargin, width - 50])
+		.domain([
+			d3.min(Object.values(apps), app => d3.min(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()*1000)),
+			d3.max(Object.values(apps), app => d3.max(app["versions"], a => moment(a["date"], "YYYY-MM-DD").unix()*1000))
+		]);
+
+	//xScale = xScale.ticks(d3.timeMinute, 15);
+	console.log("x :", xScale);
+
 	yScale = d3.scaleLinear().range([50, height - 100 - bottomMargin]).domain([d3.max(Object.values(apps), app => {if(app["os"] == "android") {return d3.max(app["versions"], a => parseFloat(a["size"]))} else return 0}), 0]);
 
 	Color = d3.scaleOrdinal()
@@ -66,8 +71,9 @@ function drawSizeEvolutionChart(apps, apps_to_draw) {
 
 	yAxis = d3.axisLeft(yScale)
 
-	xAxis = d3.axisBottom(xScale)//.ticks(d3.timeMonth.every(1))
-    .tickFormat(d => moment(new Date(d*1000)).format("MM/YYYY"))
+	xAxis = d3.axisBottom(xScale)//.ticks(dates)
+		.ticks(d3.timeMonth.every(6))
+	 .tickFormat(d => moment(new Date(d)).format("MMMM YYYY"))
         
 
 	svg.append("g")
@@ -146,7 +152,7 @@ function draw_path(apps, apps_to_draw){
         path.datum(versions).transition().duration(1000)
             .attr("d", d3.line()
                 .x(function (d) {
-                    return xScale(moment(d["date"], "YYYY-MM-DD").unix())
+                    return xScale(moment(d["date"], "YYYY-MM-DD").unix()*1000)
                 })
                 .y(function (d) {
                     return yScale(parseFloat(d["size"]))
@@ -177,7 +183,7 @@ function draw_path(apps, apps_to_draw){
 			.datum(versions)
 			.attr("d", d3.line()
 				.x(function (d) {
-					return xScale(moment(d["date"], "YYYY-MM-DD").unix())
+					return xScale(moment(d["date"], "YYYY-MM-DD").unix()*1000)
 				})
 				.y(function (d) {
 					return yScale(parseFloat(d["size"]))

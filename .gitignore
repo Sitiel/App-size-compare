@@ -299,3 +299,5 @@ dmypy.json
 # Sonarlint plugin
 
 # End of https://www.gitignore.io/api/macos,python,webstorm+all,phpstorm+all,jupyternotebooks,visualstudiocode
+
+~`~*

@@ -10,6 +10,10 @@ The memory of our phone is often perceived as an element limiting the functional
 
 This school project aim is to, through a web page, visualize and clarify those questions that users find it difficult to outline with their device.
 
+The website can be found here: https://github.com/Sitiel/dataviz_6
+
+![Teaser of our web page](teaser.gif)
+
 ***
 
 This project has been developed as a part of the course **Data Visualization**, taught at the [Université Lyon 1](https://www.univ-lyon1.fr/) ([Master in Artificial Intelligence](http://master-info.univ-lyon1.fr/IA/)). The course can be found [here](https://lyondataviz.github.io/teaching/lyon1-m2/2019/).

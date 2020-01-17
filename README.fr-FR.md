@@ -10,6 +10,10 @@ La mémoire de notre téléphone est souvent perçue comme un élément limitant
 
 Ce projet universitaire a pour but de visualiser et de clarifier, à travers une page Web, les questions que les utilisateurs ont du mal à cerner avec leur appareil.
 
+Le site web peut être trouvé ici : https://github.com/Sitiel/dataviz_6
+
+![Teaser de notre page web](teaser.gif)
+
 ***
 
 Ce projet a été développé dans le cadre du cours **Data Visualization**, enseigné à l'[Université Lyon 1](https://www.univ-lyon1.fr/) ([Master en Intelligence Artificielle]((http://master-info.univ-lyon1.fr/IA/))). Le cours peut être trouvé [ici](https://lyondataviz.github.io/teaching/lyon1-m2/2019/).
